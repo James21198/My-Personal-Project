@@ -1,0 +1,45 @@
+<div class="text-center">
+  <h2>{{isbn}}</h2>
+  <p>{{title}}</p>
+  <img src={{coverImgUrl}} />
+  <p>{{user.name}} {{createdAt}}</p>
+
+  <form class="addReview-form" action="/" method="post">
+    <input type="id" name="isbn" placeholder={{isbn}} value={{isbn}} />
+    <p id="pTitle">{{title}}</p>
+    <input type="hidden" id="book-cover" value={{coverImg}} />
+    <input type="review"
+      id="review_text"
+      name="text"
+      placeholder="Your Review"
+      value={{review}}
+    ></textarea>
+    <button class="btn btn-danger" type="submit">Post review</button>
+  </form>
+
+  <div class="row mb-4 post">
+    <div class="">
+    </div>
+    <div class="">
+      {{#each reviews as |review|}}
+        <form class="deleteReview-form">
+            <input type="hidden" name="isbn" value={{review.isbn}} />
+             <p id="pDelTitle">{{review.title}}</p>
+            <input type="hidden" name="book_cover" value={{review.coverImg}} />
+          <p>
+            <input type="hidden" id="review_id" value={{review.id}} />
+            {{review.review}}
+            <p>Created by
+              {{review.reviewCreatedBy}}
+              on
+              {{format_date review.reviewCreatedAt}}</p>
+          </p>
+          <button  id={{review.id}} type="submit" class="delete-btn">DELETE</button>
+        </form>
+      {{/each}}
+
+    </div>
+  </div>
+</div>
+
+<script src="/js/review.js"></script>
